@@ -1,6 +1,11 @@
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        //Создаём объект калькулятор
+        Calc calc = new Calc(Input.getPersonCount());
+        //Запрос у пользователя товаров
+        Input.getAndAddPositions(calc);
+        //Показать результат
+        Output.showAndCalculate(calc);
     }
 }
