@@ -3,14 +3,14 @@ import java.util.Scanner;
 public class Input {
 
     //Запросить у пользователя количество человек, возвращает количество
-    public static int getPersonCount(){
+    public static int getPersonCount() {
 
         Scanner scanner = new Scanner(System.in);
 
-        while (true){
+        while (true) {
             System.out.println("На скольких человек необходимо разделить счёт?");
 
-            if (!scanner.hasNextInt()){
+            if (!scanner.hasNextInt()) {
                 scanner.nextLine();
                 System.out.println("Необходимо ввести количество цифрами");
             } else {
@@ -18,7 +18,7 @@ public class Input {
                 if (personCount > 1) {
                     System.out.println("Счёт будет разделён на " + personCount + " персон");
                     return personCount;
-                } else if (personCount == 1){
+                } else if (personCount == 1) {
                     System.out.println("Вы один? Тогда нет смысла ничего считать и делить :)");
                 } else {
                     System.out.println("Меньше одного - это некорректное значение для подсчёта.");
@@ -29,54 +29,54 @@ public class Input {
     }
 
     //Запрос товаров у пользователя и добавление их в калькулятор
-public static void getAndAddPositions(Calc calc){
+    public static void getAndAddPositions(Calc calc) {
 
-    Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-    String productName;
-    double price;
+        String productName;
+        double price;
 
-    do {
+        do {
 
-        System.out.println("Введите наименование товара");
+            System.out.println("Введите наименование товара");
 
             productName = scanner.nextLine();
 
-        System.out.println("и его цену, в формате 'рубли.копейки', например 10.45 или 11.40.");
+            System.out.println("и его цену, в формате 'рубли.копейки', например 10.45 или 11.40.");
 
-        if (scanner.hasNextDouble()){
-            price = scanner.nextDouble();
+            if (scanner.hasNextDouble()) {
+                price = scanner.nextDouble();
 
-            if (price < 0){
-                System.out.println("Ошибка! Цена меньше нуля.");
+                if (price < 0) {
+                    System.out.println("Ошибка! Цена меньше нуля.");
+                    continue;
+                }
+
+            } else {
+                System.out.println("Вы ввели цену неверно!");
+                scanner.nextLine();
                 continue;
             }
 
-        } else {
-            System.out.println("Вы ввели цену неверно!");
             scanner.nextLine();
-            continue;
-        }
 
-        scanner.nextLine();
+            if (calc.contains(productName)) {
+                calc.changePrice(price, productName);
+            } else {
+                Product product = new Product(productName, price);
+                calc.addProduct(product);
+            }
 
-        if (calc.contains(productName)){
-            calc.changePrice(price, productName);
-        } else {
-            Product product = new Product(productName, price);
-            calc.addProduct(product);
-        }
+            System.out.println("Хотите добавить ещё один товар? Введите любой символ\nи нажмите Enter.\nА для завершения ввода товаров введите 'Завершить'");
 
-        System.out.println("Хотите добавить ещё один товар? Введите любой символ\nи нажмите Enter.\nА для завершения ввода товаров введите 'Завершить'");
+            if (scanner.next().equalsIgnoreCase("Завершить")) {
+                break;
+            }
 
-        if (scanner.next().equalsIgnoreCase("Завершить")){
-            break;
-        }
+            scanner.nextLine();
 
-        scanner.nextLine();
+        } while (true);
 
-    } while (true);
-
-}
+    }
 
 }

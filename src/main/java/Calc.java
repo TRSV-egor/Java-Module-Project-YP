@@ -5,14 +5,14 @@ import java.util.Iterator;
 public class Calc {
     int person;
 
-    public Calc(int person){
+    public Calc(int person) {
         this.person = person;
     }
 
     ArrayList<Product> productsAray = new ArrayList<>();
 
     //Добавляет товар в калькулятор
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
 
         productsAray.add(product);
         Output.sayAddProduct(product, this);
@@ -21,11 +21,11 @@ public class Calc {
 
 
     //Получить текущую сумму в калькуляторе
-    public double getProductsSum(){
+    public double getProductsSum() {
         Iterator<Product> iterator = productsAray.iterator();
         double sum = 0;
 
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Product product = iterator.next();
             sum += product.price;
         }
@@ -34,7 +34,7 @@ public class Calc {
     }
 
     //Проевряет содержится ли название в хранилище
-    public boolean contains(String productName){
+    public boolean contains(String productName) {
 
         for (Product product : productsAray) {
             if (product.product.equalsIgnoreCase(productName)) {
@@ -45,7 +45,7 @@ public class Calc {
     }
 
     //Меняет цену у указанного товара
-    public void changePrice(double newPrice, String productName){
+    public void changePrice(double newPrice, String productName) {
 
         for (Product product : productsAray) {
             if (product.product.equalsIgnoreCase(productName)) {
